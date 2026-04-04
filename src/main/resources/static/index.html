@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GigShield AI | Phase 2</title>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <main class="dashboard-container">
+        <!-- Sidebar / Header Area -->
+        <header class="header">
+            <h1 class="logo">GigShield <span>AI</span></h1>
+            <p class="subtitle">Zero-Touch Parametric Income Protection Dashboard</p>
+        </header>
+
+        <section class="content-grid">
+            
+            <!-- Step 1: Worker Onboarding Card -->
+            <div class="card glass">
+                <h2>1. Worker Registration <span class="badge">API</span></h2>
+                <p>Register a pilot gig worker to establish baseline risk profiles.</p>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" value="Raju Sharma">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="city" value="Mumbai" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Avg Weekly Earnings (₹)</label>
+                            <input type="number" id="weeklyEarnings" value="3000">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Register Worker</button>
+                </form>
+                <div id="registerResponse" class="response-box hidden"></div>
+            </div>
+
+            <!-- Step 2: Dynamic Policy Card -->
+            <div class="card glass">
+                <h2>2. AI Dynamic Pricing <span class="badge">Mock ML</span></h2>
+                <p>Observe how the AI engine adjusts the base premium live based on hyper-local zone selection.</p>
+
+                <div class="form-group">
+                    <label>Hyper-Local Operating Zone (Select Condition)</label>
+                    <select id="hyperLocalZone">
+                        <option value="unknown">Standard Zone (Base Risk - 3% algorithm)</option>
+                        <option value="andheri_east" selected>Andheri East (Historically Safe Zone - Discounted)</option>
+                    </select>
+                </div>
+                <button id="buyPolicyBtn" class="btn secondary-btn" disabled>Generate Dynamic Policy</button>
+                <div id="policyResponse" class="response-box hidden"></div>
+            </div>
+
+            <!-- Step 3: Trigger Disruption (Zero-Touch Claim) -->
+            <div class="card glass threat-card">
+                <h2>3. Zero-Touch Payout Engine <span class="badge alert">Webhook</span></h2>
+                <p>Simulate a severe localized disruption to trigger instant payout scanning without manual claims.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>External Condition API</label>
+                        <select id="disruptionType">
+                            <option value="HEAVY_RAINFALL">Extreme Monsoon (> 50mm)</option>
+                            <option value="EXTREME_HEAT">Extreme Heatwave (> 45°C)</option>
+                            <option value="SOCIAL_CURFEW">City Curfew Alert</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Severity Log Value</label>
+                        <input type="number" id="severityLevel" value="65">
+                    </div>
+                </div>
+                <button id="triggerDisastersBtn" class="btn danger-btn">⚡ Broadcast System Disruption Event</button>
+                <div id="disruptionResponse" class="response-box hidden"></div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

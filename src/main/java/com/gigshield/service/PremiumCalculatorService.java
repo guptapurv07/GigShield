@@ -9,6 +9,12 @@ import java.util.Map;
 @Service
 public class PremiumCalculatorService {
 
+    private final AiPricingEngine aiPricingEngine;
+
+    public PremiumCalculatorService(AiPricingEngine aiPricingEngine) {
+        this.aiPricingEngine = aiPricingEngine;
+    }
+
     // Base premium = 3% of weekly income
     private static final double BASE_PREMIUM_RATE = 0.03;
 
@@ -39,7 +45,11 @@ public class PremiumCalculatorService {
             request.getWorkerType().toUpperCase(), 1.00);
 
         double basePremium        = request.getWeeklyIncome() * BASE_PREMIUM_RATE;
-        double finalWeeklyPremium = round(basePremium * cityMultiplier * workerMultiplier);
+        double initialWeeklyPremium = round(basePremium * cityMultiplier * workerMultiplier);
+        
+        // Pass through AI Engine (assumes unknown hyper-local zone for this legacy endpoint)
+        double finalWeeklyPremium = aiPricingEngine.adjustPremiumDynamically(initialWeeklyPremium, request.getCity(), "unknown");
+        
         double totalPremium       = round(finalWeeklyPremium * request.getCoverageWeeks());
 
         double maxPayoutPerWeek = round(request.getWeeklyIncome() * MAX_PAYOUT_RATE);
